@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SubRequest>
+﻿@model SubRequestIndexViewModel
 @{
     
 }
@@ -14,7 +14,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var req in Model)
+        @foreach (var req in Model.SubRequestActive)
         {
             <tr>
                 <td scope="row">@req.Title</td>
@@ -24,5 +24,28 @@
             </tr>
         }
         
+    </tbody>
+</table>
+<br />
+<table class="table table-warning">
+    <thead>
+        <tr>
+            <th scope="col">Titre</th>
+            <th scope="col">Date de la demande</th>
+            <th scope="col">Montant</th>
+            <th scope="col">Etat</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var req in Model.SubRequesteOlder)
+        {
+            <tr>
+                <td scope="row">@req.Title</td>
+                <td>@req.CreatedAt</td>
+                <td>@req.Amount</td>
+                <td>@req.Status</td>
+            </tr>
+        }
+
     </tbody>
 </table>
