@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Mvc;
 
 namespace DocaSub.Controllers
 {
@@ -6,6 +7,8 @@ namespace DocaSub.Controllers
     {
         public IActionResult Index()
         {
+            //ViewData["Title"] = "Home";
+            //ViewBag.Title = "Home";
             return View();
         }
     }
