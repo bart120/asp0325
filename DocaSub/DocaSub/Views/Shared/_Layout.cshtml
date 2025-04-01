@@ -10,6 +10,11 @@
     <title>@ViewBag.Title - DocaSub</title>
 
     <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        .input-validation-error{
+            border-color:red;
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
@@ -24,7 +29,7 @@
                         <a class="nav-link" aria-current="page" href="~/">Accueil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" asp-controller="SubRequests" asp-action="Index" >Mes demandes</a>
+                        <a class="nav-link" asp-controller="SubRequests" asp-action="Index">Mes demandes</a>
                         @*@Html.ActionLink("Mes demandes", "Index", "Subventions", null, new { @class = "nav-link" })*@
 
                     </li>
@@ -45,12 +50,12 @@
     </nav>
 
 
-
-    @RenderBody()
-
+    <div class="container">
+        @RenderBody()
+    </div>
     <footer>
         &copy; 2025 - DocaSub
-    </footer>    
+    </footer>
     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
 </html>

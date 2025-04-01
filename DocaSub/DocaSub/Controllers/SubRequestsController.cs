@@ -41,5 +41,23 @@ namespace DocaSub.Controllers
             };
             return View(model);
         }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+
+        }
+
+        [HttpPost]
+        //[ActionName("Create")]
+        public IActionResult Create([FromForm]SubRequest subRequest)
+        {
+            if (ModelState.IsValid)
+            {
+
+            }
+            return View(subRequest);
+        }
     }
 }
