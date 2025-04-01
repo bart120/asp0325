@@ -1,3 +1,6 @@
+using DocaSub.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 //services
 // Add services to the container.
@@ -8,6 +11,17 @@ builder.Services.AddControllersWithViews();/*.AddRazorOptions(options =>
     options.ViewLocationFormats.Clear();
     options.ViewLocationFormats.Add("MesVues/{1}/{0}.cshtml");
 });*/ // mvc
+builder.Services.AddDbContext<DocaDbContext>(options =>
+{
+    if (builder.Environment.IsEnvironment("Testing"))
+    {
+        //options.UseInMemory("TestingDB");
+    }
+    else
+    {
+        options.UseSqlServer(builder.Configuration.GetConnectionString("DocaConnection"));
+    }
+});
 
 var app = builder.Build();
 

@@ -1,14 +1,24 @@
-﻿using DocaSub.Models;
+﻿using DocaSub.Data;
+using DocaSub.Models;
 using DocaSub.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace DocaSub.Controllers
 {
     public class SubRequestsController : Controller
     {
+        private readonly DocaDbContext _dbContext;
+
+        public SubRequestsController(DocaDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
+
         [Route("mes-demandes")]
         public IActionResult Index()
         {
+            //_dbContext.Database.ExecuteSqlRaw("SELECT * .....");
             var liste = new List<SubRequest>
             {
                 new SubRequest { Id = 1, Title = "Demande 1", Amount = 1000, Status = 1, CreatedAt=DateTime.Now },
