@@ -20,5 +20,10 @@ namespace DocaSub.Models
         [DataType(DataType.Date)]
         public DateTime CreatedAt { get; set; }
         public int Priority { get; set; }
+
+        
+        public int SubventionId { get; set; }
+        [ForeignKey("SubventionId")]
+        public Subvention Subvention { get; set; }
     }
 }
