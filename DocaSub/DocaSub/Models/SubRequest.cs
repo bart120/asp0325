@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace DocaSub.Models
 {
@@ -17,8 +18,11 @@ namespace DocaSub.Models
         [Required(ErrorMessage = "{0} obligatoire")]
         public decimal Amount { get; set; } = 0;
         public int Status { get; set; } = 0;
+        
         [DataType(DataType.Date)]
+        [JsonIgnore]
         public DateTime CreatedAt { get; set; }
+        
         public int Priority { get; set; }
 
         

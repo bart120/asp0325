@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using DocaSub.Data;
 using DocaSub.Models;
+using System.Linq.Expressions;
 
 namespace DocaSub.Controllers.API
 {
@@ -23,13 +24,17 @@ namespace DocaSub.Controllers.API
 
         // GET: api/Subventions
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Subvention>>> GetSubventions()
+        public async Task<ActionResult<IEnumerable<Subvention>>> GetSubventions(bool ordered = false)
         {
+            if (ordered)
+            {
+                return await _context.Subventions.OrderBy(x => x.Name).ToListAsync();
+            }
             return await _context.Subventions.ToListAsync();
         }
 
         // GET: api/Subventions/5
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public async Task<ActionResult<Subvention>> GetSubvention(int id)
         {
             var subvention = await _context.Subventions.Include("SubRequests").SingleOrDefaultAsync(x => x.Id == id);
@@ -40,6 +45,32 @@ namespace DocaSub.Controllers.API
             }
 
             return subvention;
+        }
+
+        [HttpGet("subrequests")]
+        public async Task<ActionResult<IEnumerable<Subvention>>> GetSubRequests()
+        {
+            return await _context.Subventions.Include("SubRequests").ToListAsync();
+        }
+
+        // GET: api/Subventions
+        [HttpGet("orderby/{field}")]
+        public async Task<ActionResult<IEnumerable<Subvention>>> GetOrderedSubventions(string field = "Name")
+        {
+            if(typeof(Subvention).GetProperty(field) == null)
+            {
+                return BadRequest("Invalid field name");
+            }
+
+            var parameter = Expression.Parameter(typeof(Subvention), "x");
+            var property = Expression.Property(parameter, field);
+            var type = Expression.Convert(property, typeof(object));
+
+            var lambda = Expression.Lambda<Func<Subvention, object>>(type, parameter);
+
+
+            //return await _context.Subventions.OrderBy(x => x.Name).ToListAsync();
+            return await _context.Subventions.OrderBy(lambda).ToListAsync();
         }
 
         // PUT: api/Subventions/5
