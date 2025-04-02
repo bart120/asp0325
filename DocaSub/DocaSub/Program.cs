@@ -40,10 +40,23 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-//app.MapControllers();
+/*//app.MapControllers();
 app.MapControllerRoute( // mvc
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}");*/
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+      name: "areas",
+      pattern: "{area:exists}/{controller=Dashboard}/{action=Index}/{id?}"
+    );
+
+    endpoints.MapControllerRoute(
+     name: "default",
+     pattern: "{controller=Home}/{action=Index}/{id?}"
+   );
+});
+
 
 //app.MapRazorPages(); // razor pages
 
