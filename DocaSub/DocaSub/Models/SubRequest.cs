@@ -24,6 +24,6 @@ namespace DocaSub.Models
         
         public int SubventionId { get; set; }
         [ForeignKey("SubventionId")]
-        public Subvention Subvention { get; set; }
+        public virtual Subvention Subvention { get; set; }
     }
 }

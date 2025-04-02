@@ -6,7 +6,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();// razor pages
 
-builder.Services.AddControllersWithViews();/*.AddRazorOptions(options =>
+builder.Services.AddControllersWithViews().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+});/*.AddRazorOptions(options =>
 {
     options.ViewLocationFormats.Clear();
     options.ViewLocationFormats.Add("MesVues/{1}/{0}.cshtml");
@@ -19,7 +22,8 @@ builder.Services.AddDbContext<DocaDbContext>(options =>
     }
     else
     {
-        options.UseSqlServer(builder.Configuration.GetConnectionString("DocaConnection"));
+        options//.UseLazyLoadingProxies()
+            .UseSqlServer(builder.Configuration.GetConnectionString("DocaConnection"));
     }
 });
 

@@ -39,6 +39,7 @@
             <th scope="col">Date de la demande</th>
             <th scope="col">Montant</th>
             <th scope="col">Etat</th>
+            <th scope="col">Type de subvention</th>
         </tr>
     </thead>
     <tbody>
@@ -49,6 +50,7 @@
                 <td>@req.CreatedAt</td>
                 <td>@req.Amount</td>
                 <td>@req.Status</td>
+                <td>@req.Subvention.Name</td>
             </tr>
         }
 

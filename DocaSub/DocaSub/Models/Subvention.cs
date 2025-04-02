@@ -35,5 +35,7 @@ namespace DocaSub.Models
         [DataType(DataType.Date)]
         //[Compare("Start", ErrorMessage = "La date de fin doit être supérieure à la date de début")]
         public DateTime? End { get; set; }
+
+        public virtual ICollection<SubRequest> SubRequests { get; set; }
     }
 }
