@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 //services
 // Add services to the container.
-//builder.Services.AddRazorPages();// razor pages
+builder.Services.AddRazorPages();// razor pages
 
 builder.Services.AddControllersWithViews();/*.AddRazorOptions(options =>
 {
@@ -55,6 +55,9 @@ app.UseEndpoints(endpoints =>
      name: "default",
      pattern: "{controller=Home}/{action=Index}/{id?}"
    );
+
+    
+    endpoints.MapRazorPages(); 
 });
 
 
