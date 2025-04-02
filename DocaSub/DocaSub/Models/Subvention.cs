@@ -33,7 +33,7 @@ namespace DocaSub.Models
 
         [Display(Name = "Fin de validité")]
         [DataType(DataType.Date)]
-        [Compare("Start", ErrorMessage = "La date de fin doit être supérieure à la date de début")]
+        //[Compare("Start", ErrorMessage = "La date de fin doit être supérieure à la date de début")]
         public DateTime? End { get; set; }
     }
 }
