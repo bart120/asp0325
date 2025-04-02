@@ -18,6 +18,15 @@
         <input asp-for="Amount" class="form-control" type="number">
         <span asp-validation-for="Amount" class="text-danger"></span>
     </div>
+    <div class="mb-3">
+        <label asp-for="SubventionId" class="form-label">Type de subvention</label>
+        <select asp-for="SubventionId" class="form-control" asp-items="ViewBag.ListSub">
+            @*@foreach (var item in ViewBag.Subventions) {
+                <option value="@item.Id">@item.Name</option>
+            }*@
+        </select>
+        <span asp-validation-for="SubventionId" class="text-danger"></span>
+    </div>
     <div>
         <button type="submit" class="btn btn-primary">Enregistrer</button>
     </div>

@@ -2,6 +2,7 @@
 using DocaSub.Models;
 using DocaSub.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace DocaSub.Controllers
@@ -47,6 +48,12 @@ namespace DocaSub.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            //ViewBag.Subventions = _dbContext.Subventions.ToList();
+           /* var list = _dbContext.Subventions.Where(x => x.End > DateTime.Now);
+            IEnumerable<SelectListItem> resultat = list.Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.Name });*/
+
+            IEnumerable <SelectListItem> list = _dbContext.Subventions.Where(x =>x.End == null || x.End > DateTime.Now).Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.Name});
+            ViewBag.ListSub = list;
             return View();
 
         }
@@ -56,6 +63,7 @@ namespace DocaSub.Controllers
         //[ActionName("Create")]
         public async Task<IActionResult> Create([FromForm]SubRequest subRequest)
         {
+            ModelState.Remove("Subvention");
             if (ModelState.IsValid)
             {
                 subRequest.CreatedAt = DateTime.Now;
@@ -68,6 +76,9 @@ namespace DocaSub.Controllers
                 //return View(subRequest);
                 return RedirectToAction("Index");
             }
+            //ViewBag.Subventions = _dbContext.Subventions.ToList();
+            IEnumerable<SelectListItem> list = _dbContext.Subventions.Where(x => x.End == null || x.End > DateTime.Now).Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.Name });
+            ViewBag.ListSub = list;
             return View(subRequest);
         }
     }
