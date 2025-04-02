@@ -24,7 +24,7 @@
     <environment exclude="Production">
         <link href="~/css/site.css" rel="stylesheet" />
     </environment>
-    @RenderSection("SectionStyles", false)
+    @RenderSection("Styles", false)
 </head>
 <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -36,9 +36,8 @@
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
                     <a class="nav-link active" asp-controller="Home" asp-action="Index" asp-area="">Retour App</a>
-                    <a class="nav-link" href="#">Features</a>
-                    <a class="nav-link" href="#">Pricing</a>
-                    <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                    <a class="nav-link" asp-controller="Subventions" asp-action="Index" asp-area="Backoffice">Subventions</a>
+                    
                 </div>
             </div>
         </div>
@@ -49,6 +48,6 @@
     </div>
     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    @RenderSection("SectionScripts", false)
+    @RenderSection("Scripts", false)
 </body>
 </html>

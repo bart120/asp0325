@@ -11,6 +11,8 @@ namespace DocaSub.Data
 
         public DbSet<SubRequest> SubRequests { get; set; }
 
+        public DbSet<Subvention> Subventions { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

@@ -52,6 +52,7 @@ namespace DocaSub.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         //[ActionName("Create")]
         public async Task<IActionResult> Create([FromForm]SubRequest subRequest)
         {
