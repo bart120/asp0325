@@ -34,7 +34,7 @@ builder.Services.AddAuthentication(options =>
         ValidateIssuerSigningKey = true,
         ValidIssuer = "docaformation",
         ValidAudience = "docaformation",
-        IssuerSigningKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("unsupercledocaformation")),
+        IssuerSigningKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("unesupercledocaformation123456789!!!!!!!")),
     };
 });
 
@@ -97,6 +97,22 @@ builder.Services.AddSwaggerGen(options =>
 
 //builder.Services.ConfigureOptions<ConfigureSwaggerOptions>();
 
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(builder =>
+    {
+        List<string> hosts = new List<string>();
+        hosts.Add("http://monhostdoca.fr");
+        List<string> methods = new List<string> { "GET", "POST", "PUT", "OPTIONS"};
+        builder.WithOrigins(hosts.ToArray())
+               .WithMethods(methods.ToArray())
+               //.AllowAnyMethod()
+               .AllowAnyHeader();
+        /*builder.AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader();*/
+    });
+});
 
 var app = builder.Build();
 
@@ -107,14 +123,16 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
+
 }
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthorization(); //oauth2
+
 app.UseAuthentication(); //oidc
+app.UseAuthorization(); //oauth2
 
 /*//app.MapControllers();
 app.MapControllerRoute( // mvc

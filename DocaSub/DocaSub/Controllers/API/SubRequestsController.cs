@@ -28,6 +28,7 @@ namespace DocaSub.Controllers.API
 
         // GET: api/SubRequests
         [HttpGet]
+        [Authorize(Roles = "Admin,User")]
         public async Task<ActionResult<IEnumerable<SubRequest>>> GetSubRequests()
         {
             return await _context.SubRequests.ToListAsync();

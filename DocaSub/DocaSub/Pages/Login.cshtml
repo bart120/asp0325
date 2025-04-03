@@ -1,0 +1,24 @@
+﻿@page "/authentification"
+@model DocaSub.Pages.LoginModel
+@{
+    Layout = "_Layout";
+}
+
+<form method="post">
+    <div class="mb-3">
+        <label asp-for="Username"  class="form-label"></label>
+        <input asp-for="Username" class="form-control">
+        <span asp-validation-for="Username"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Password" class="form-label"></label>
+        <input asp-for="Password" class="form-control" >
+        <span asp-validation-for="Password"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Se connecter</button>
+</form>
+
+@if(!string.IsNullOrWhiteSpace(Model.Token))
+{
+    <p>Le token est: @Model.Token</p>
+}

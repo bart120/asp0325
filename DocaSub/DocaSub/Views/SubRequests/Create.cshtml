@@ -26,6 +26,7 @@
             }*@
         </select>
         <span asp-validation-for="SubventionId" class="text-danger"></span>
+        <span id="description"></span>
     </div>
     <div>
         <button type="submit" class="btn btn-primary">Enregistrer</button>
@@ -40,4 +41,22 @@
         <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
         <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
     </environment>
+
+    <script>
+        document.getElementById("SubventionId").addEventListener("change", async function(){
+            const id = this.value;
+            const response = await fetch(`https://localhost:7129/api/v1/subventions/${id}`,{
+                method: "GET",
+                headers: {
+                    "Accept": "application/json",
+                    "Content-Type": "application/json"
+                    //"Authorization": "Bearer " + token"
+                }
+            });
+            if(response.ok){
+                const data = await response.json();
+                document.getElementById("description").innerHTML = data.description;
+            }
+        });
+    </script>
 }
