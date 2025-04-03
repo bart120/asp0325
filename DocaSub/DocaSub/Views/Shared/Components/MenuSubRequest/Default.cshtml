@@ -1,0 +1,13 @@
+﻿@model MenuSubRequestViewModel
+@{
+}
+
+<li class="nav-item">
+    <a class="nav-link" asp-controller="SubRequests" asp-action="Index">
+        Mes <span class="badge text-bg-primary">@Model.RequestCount</span> demandes
+        
+        </a>
+
+    @*@Html.ActionLink("Mes demandes", "Index", "Subventions", null, new { @class = "nav-link" })*@
+
+</li>
