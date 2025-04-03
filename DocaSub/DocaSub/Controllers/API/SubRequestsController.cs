@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using DocaSub.Data;
 using DocaSub.Models;
 using Asp.Versioning;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DocaSub.Controllers.API
 {
@@ -15,6 +16,7 @@ namespace DocaSub.Controllers.API
     [ApiVersion("2.0")]
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
+    [Authorize]
     public class SubRequestsController : ControllerBase
     {
         private readonly DocaDbContext _context;
