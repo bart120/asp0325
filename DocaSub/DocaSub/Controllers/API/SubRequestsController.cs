@@ -7,10 +7,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using DocaSub.Data;
 using DocaSub.Models;
+using Asp.Versioning;
 
 namespace DocaSub.Controllers.API
 {
-    [Route("api/[controller]")]
+    [ApiVersion("1.0")]
+    [ApiVersion("2.0")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
     public class SubRequestsController : ControllerBase
     {

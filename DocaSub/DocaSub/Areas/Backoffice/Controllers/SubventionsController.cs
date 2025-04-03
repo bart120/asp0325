@@ -57,6 +57,7 @@ namespace DocaSub.Areas.Backoffice.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Name,Description,Partner,Category,Start,End")] Subvention subvention)
         {
+            ModelState.Remove("SubRequests");
             if (ModelState.IsValid)
             {
                 _context.Add(subvention);

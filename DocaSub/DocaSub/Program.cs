@@ -1,6 +1,10 @@
 using Asp.Versioning;
+using Asp.Versioning.ApiExplorer;
 using DocaSub.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
 var builder = WebApplication.CreateBuilder(args);
 //services
@@ -43,6 +47,25 @@ builder.Services.AddApiVersioning(options =>
     options.SubstituteApiVersionInUrl = true;
 });*/
 
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+    {
+        Title = "DocaSub API",
+        Version = "v1",
+        Description = "API for DocaSub application"
+    });
+    options.SwaggerDoc("v2", new Microsoft.OpenApi.Models.OpenApiInfo
+    {
+        Title = "DocaSub API",
+        Version = "v2",
+        Description = "API for DocaSub application"
+    });
+});
+
+//builder.Services.ConfigureOptions<ConfigureSwaggerOptions>();
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -79,7 +102,37 @@ app.UseEndpoints(endpoints =>
     endpoints.MapRazorPages();
 });
 
+app.UseSwagger();
+app.UseSwaggerUI(options =>
+{
+    options.SwaggerEndpoint("/swagger/v1/swagger.json", "DocaSub API V1");
+    options.SwaggerEndpoint("/swagger/v2/swagger.json", "DocaSub API V2");
+    options.RoutePrefix = string.Empty; // Set Swagger UI at the app's root
+});
+
 //app.MapControllers();
 //app.MapRazorPages(); // razor pages
 
 app.Run();
+
+
+
+public class ConfigureSwaggerOptions : IConfigureOptions<SwaggerGenOptions>
+{
+    private readonly IApiVersionDescriptionProvider _provider;
+
+    public ConfigureSwaggerOptions(IApiVersionDescriptionProvider provider) =>
+        _provider = provider;
+
+    public void Configure(SwaggerGenOptions options)
+    {
+        foreach (var description in _provider.ApiVersionDescriptions)
+        {
+            options.SwaggerDoc(description.GroupName, new OpenApiInfo
+            {
+                Title = $"My API {description.ApiVersion}",
+                Version = description.ApiVersion.ToString()
+            });
+        }
+    }
+}

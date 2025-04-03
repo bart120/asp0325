@@ -5,6 +5,8 @@ VisualStudioVersion = 17.13.35825.156
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocaSub", "DocaSub\DocaSub.csproj", "{9F5B7127-D4D6-40B5-9992-1829EF5942A0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocaSub.Tests", "DocaSub.Tests\DocaSub.Tests.csproj", "{71098284-F530-4ED9-A29E-C049B8A75A63}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{9F5B7127-D4D6-40B5-9992-1829EF5942A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9F5B7127-D4D6-40B5-9992-1829EF5942A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9F5B7127-D4D6-40B5-9992-1829EF5942A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71098284-F530-4ED9-A29E-C049B8A75A63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71098284-F530-4ED9-A29E-C049B8A75A63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71098284-F530-4ED9-A29E-C049B8A75A63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71098284-F530-4ED9-A29E-C049B8A75A63}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

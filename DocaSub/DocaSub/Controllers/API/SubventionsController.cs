@@ -61,7 +61,7 @@ namespace DocaSub.Controllers.API
                 return NotFound();
             }
 
-            return subvention;
+            return Ok(subvention);
         }
 
         [HttpGet("subrequests")]
