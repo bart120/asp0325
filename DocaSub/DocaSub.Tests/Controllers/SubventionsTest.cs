@@ -59,7 +59,7 @@ namespace DocaSub.Tests
         public async Task GetSubvention_SubventionExiste_Return404()
         {
            
-            var contollerAPI = new SubventionsController(dbContext);
+            var contollerAPI = new SubventionsController(dbContext, null);
             var result = await contollerAPI.GetSubvention(856);
 
             //Assert
