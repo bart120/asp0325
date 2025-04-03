@@ -20,10 +20,12 @@ namespace DocaSub.Controllers.API
     public class SubventionsController : ControllerBase
     {
         private readonly DocaDbContext _context;
+        private readonly ILogger<SubventionsController> _logger;
 
-        public SubventionsController(DocaDbContext context)
+        public SubventionsController(DocaDbContext context, ILogger<SubventionsController> logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         // GET: api/Subventions
@@ -32,6 +34,7 @@ namespace DocaSub.Controllers.API
         [MapToApiVersion("1.0")]
         public async Task<ActionResult<IEnumerable<Subvention>>> GetSubventionsV1()
         {
+            _logger.LogInformation("GetSubventionsV1 called");
             return await _context.Subventions.ToListAsync();
         }
 
@@ -43,9 +46,10 @@ namespace DocaSub.Controllers.API
         [MapToApiVersion("2.0")]
         public async Task<ActionResult<IEnumerable<Subvention>>> GetSubventionsV2(/*bool ordered = false*/)
         {
+            _logger.LogError("GetSubventionsV2 called");
             /*if (ordered)
             {*/
-                return await _context.Subventions.OrderBy(x => x.Name).ToListAsync();
+            return await _context.Subventions.OrderBy(x => x.Name).ToListAsync();
             /*}
             return await _context.Subventions.ToListAsync();*/
         }

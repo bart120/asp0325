@@ -1,4 +1,7 @@
-﻿@{
+﻿@inject ILogger<dynamic> Logger
+
+@{
+    Logger.LogWarning($"Rendering _Message.cshtml with {TempData["SuccessMessage"]?.ToString()}");
 }
 
 @if (!string.IsNullOrWhiteSpace(TempData["ErrorMessage"]?.ToString()))

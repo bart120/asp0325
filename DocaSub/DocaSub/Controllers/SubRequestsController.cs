@@ -38,9 +38,9 @@ namespace DocaSub.Controllers
             var model = new SubRequestIndexViewModel
             {
                 SubRequestActive = _dbContext.SubRequests.Where(x => x.Status != 0),
-                SubRequesteOlder = from x in _dbContext.SubRequests
-                                   where x.Status == 0
-                                   select x
+                SubRequesteOlder = (from x in _dbContext.SubRequests
+                                    where x.Status == 0
+                                    select x).ToList()
             };
             return View(model);
         }

@@ -4,7 +4,7 @@
     {
         public IQueryable<SubRequest> SubRequestActive { get; set; }
 
-        public IQueryable<SubRequest> SubRequesteOlder { get; set; }
+        public IEnumerable<SubRequest> SubRequesteOlder { get; set; }
     }
 
 

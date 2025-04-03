@@ -43,8 +43,9 @@ namespace DocaSub.Tests
             dbContext.SaveChanges();*/
 
 
-            var contollerAPI = new SubventionsController(dbContext);
+            var contollerAPI = new SubventionsController(dbContext, null);
             var result = await contollerAPI.GetSubvention(1);
+
             
             //Assert
             var okResult = Assert.IsType<OkObjectResult>(result.Result);
