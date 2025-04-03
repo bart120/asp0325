@@ -1,3 +1,4 @@
+using Asp.Versioning;
 using DocaSub.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -26,6 +27,21 @@ builder.Services.AddDbContext<DocaDbContext>(options =>
             .UseSqlServer(builder.Configuration.GetConnectionString("DocaConnection"));
     }
 });
+
+builder.Services.AddApiVersioning(options =>
+{
+    options.ReportApiVersions = true;
+    options.AssumeDefaultVersionWhenUnspecified = true;
+    options.DefaultApiVersion = new Asp.Versioning.ApiVersion(1, 0);
+    options.ApiVersionReader = new HeaderApiVersionReader();
+    options.ApiVersionReader = new UrlSegmentApiVersionReader(); 
+}).AddMvc();
+
+/*builder.Services.AddVersionedApiExplorer(options =>
+{
+    options.GroupNameFormat = "'v'VVV";
+    options.SubstituteApiVersionInUrl = true;
+});*/
 
 var app = builder.Build();
 
@@ -60,11 +76,10 @@ app.UseEndpoints(endpoints =>
      pattern: "{controller=Home}/{action=Index}/{id?}"
    );
 
-    
-    endpoints.MapRazorPages(); 
+    endpoints.MapRazorPages();
 });
 
-
+//app.MapControllers();
 //app.MapRazorPages(); // razor pages
 
 app.Run();

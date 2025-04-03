@@ -8,11 +8,15 @@ using Microsoft.EntityFrameworkCore;
 using DocaSub.Data;
 using DocaSub.Models;
 using System.Linq.Expressions;
+using Asp.Versioning;
 
 namespace DocaSub.Controllers.API
 {
-    [Route("api/[controller]")]
+   
     [ApiController]
+    [ApiVersion("1.0")]
+    [ApiVersion("2.0")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     public class SubventionsController : ControllerBase
     {
         private readonly DocaDbContext _context;
@@ -24,13 +28,26 @@ namespace DocaSub.Controllers.API
 
         // GET: api/Subventions
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Subvention>>> GetSubventions(bool ordered = false)
+        [Route("", Name = "GetSubventionsV1")]
+        [MapToApiVersion("1.0")]
+        public async Task<ActionResult<IEnumerable<Subvention>>> GetSubventionsV1()
         {
-            if (ordered)
-            {
-                return await _context.Subventions.OrderBy(x => x.Name).ToListAsync();
-            }
             return await _context.Subventions.ToListAsync();
+        }
+
+        
+
+        // GET: api/Subventions
+        [HttpGet]
+        [Route("", Name = "GetSubventionsV2")]
+        [MapToApiVersion("2.0")]
+        public async Task<ActionResult<IEnumerable<Subvention>>> GetSubventionsV2(/*bool ordered = false*/)
+        {
+            /*if (ordered)
+            {*/
+                return await _context.Subventions.OrderBy(x => x.Name).ToListAsync();
+            /*}
+            return await _context.Subventions.ToListAsync();*/
         }
 
         // GET: api/Subventions/5
